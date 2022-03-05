@@ -1,6 +1,7 @@
 # UMD_INFOCHAL_IC22024
 This repository stores the presentation for the UMD Info Challenge 2022 for team IC22024 comprised of MIDN Kade Heckel, MIDN Jennifer Jung, MIDN Brenton Pieper, and MIDN Christian Rose
 
+## Links to the interactive maps and Graphs
 - HeatMaps
   - Benign:https://blackgazzelle.github.io/UMD_INFOCHAL_IC22024/data_visualization_html/benignHeatMap.html 
   - Attack:https://blackgazzelle.github.io/UMD_INFOCHAL_IC22024/data_visualization_html/attackHeatMap.html 
