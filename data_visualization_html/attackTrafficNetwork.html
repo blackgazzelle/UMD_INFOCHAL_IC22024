@@ -1,0 +1,124 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.css" type="text/css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis-network.min.js"> </script>
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 100%;
+            height: 750px;
+            background-color: #ffffff;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+
+        
+        #config {
+            float: left;
+            width: 400px;
+            height: 600px;
+        }
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+
+<div id = "config"></div>
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"font": {"color": "black"}, "id": "192.168.2.112", "label": "192.168.2.112", "labelHighlightBold": true, "shape": "circle"}, {"font": {"color": "black"}, "id": "131.202.243.84", "label": "131.202.243.84", "labelHighlightBold": true, "shape": "star"}, {"font": {"color": "black"}, "id": "218.108.130.167", "label": "218.108.130.167", "labelHighlightBold": true, "shape": "star"}, {"font": {"color": "black"}, "id": "192.168.5.122", "label": "192.168.5.122", "labelHighlightBold": true, "shape": "circle"}, {"font": {"color": "black"}, "id": "192.168.3.5", "label": "192.168.3.5", "labelHighlightBold": true, "shape": "circle"}, {"font": {"color": "black"}, "id": "192.168.3.8", "label": "192.168.3.8", "labelHighlightBold": true, "shape": "circle"}, {"font": {"color": "black"}, "id": "192.168.3.7", "label": "192.168.3.7", "labelHighlightBold": true, "shape": "circle"}, {"font": {"color": "black"}, "id": "192.168.3.6", "label": "192.168.3.6", "labelHighlightBold": true, "shape": "circle"}, {"font": {"color": "black"}, "id": "192.168.3.9", "label": "192.168.3.9", "labelHighlightBold": true, "shape": "circle"}, {"font": {"color": "black"}, "id": "192.168.3.13", "label": "192.168.3.13", "labelHighlightBold": true, "shape": "circle"}, {"font": {"color": "black"}, "id": "192.168.3.12", "label": "192.168.3.12", "labelHighlightBold": true, "shape": "circle"}, {"font": {"color": "black"}, "id": "192.168.3.14", "label": "192.168.3.14", "labelHighlightBold": true, "shape": "circle"}, {"font": {"color": "black"}, "id": "192.168.3.4", "label": "192.168.3.4", "labelHighlightBold": true, "shape": "circle"}, {"font": {"color": "black"}, "id": "192.168.3.11", "label": "192.168.3.11", "labelHighlightBold": true, "shape": "circle"}, {"font": {"color": "black"}, "id": "192.168.3.10", "label": "192.168.3.10", "labelHighlightBold": true, "shape": "circle"}, {"font": {"color": "black"}, "id": "192.168.3.1", "label": "192.168.3.1", "labelHighlightBold": true, "shape": "circle"}, {"font": {"color": "black"}, "id": "192.168.3.22", "label": "192.168.3.22", "labelHighlightBold": true, "shape": "circle"}, {"font": {"color": "black"}, "id": "192.168.3.17", "label": "192.168.3.17", "labelHighlightBold": true, "shape": "circle"}, {"font": {"color": "black"}, "id": "192.168.3.26", "label": "192.168.3.26", "labelHighlightBold": true, "shape": "circle"}, {"font": {"color": "black"}, "id": "192.168.3.21", "label": "192.168.3.21", "labelHighlightBold": true, "shape": "circle"}, {"font": {"color": "black"}, "id": "192.168.3.24", "label": "192.168.3.24", "labelHighlightBold": true, "shape": "circle"}, {"font": {"color": "black"}, "id": "192.168.3.23", "label": "192.168.3.23", "labelHighlightBold": true, "shape": "circle"}, {"font": {"color": "black"}, "id": "192.168.3.19", "label": "192.168.3.19", "labelHighlightBold": true, "shape": "circle"}, {"font": {"color": "black"}, "id": "192.168.3.20", "label": "192.168.3.20", "labelHighlightBold": true, "shape": "circle"}, {"font": {"color": "black"}, "id": "192.168.3.27", "label": "192.168.3.27", "labelHighlightBold": true, "shape": "circle"}, {"font": {"color": "black"}, "id": "192.168.3.25", "label": "192.168.3.25", "labelHighlightBold": true, "shape": "circle"}, {"font": {"color": "black"}, "id": "192.168.3.18", "label": "192.168.3.18", "labelHighlightBold": true, "shape": "circle"}, {"font": {"color": "black"}, "id": "192.168.3.50", "label": "192.168.3.50", "labelHighlightBold": true, "shape": "circle"}, {"font": {"color": "black"}, "id": "192.168.3.56", "label": "192.168.3.56", "labelHighlightBold": true, "shape": "circle"}, {"font": {"color": "black"}, "id": "192.168.3.57", "label": "192.168.3.57", "labelHighlightBold": true, "shape": "circle"}, {"font": {"color": "black"}, "id": "192.168.3.48", "label": "192.168.3.48", "labelHighlightBold": true, "shape": "circle"}, {"font": {"color": "black"}, "id": "192.168.3.49", "label": "192.168.3.49", "labelHighlightBold": true, "shape": "circle"}, {"font": {"color": "black"}, "id": "192.168.3.53", "label": "192.168.3.53", "labelHighlightBold": true, "shape": "circle"}, {"font": {"color": "black"}, "id": "192.168.3.43", "label": "192.168.3.43", "labelHighlightBold": true, "shape": "circle"}, {"font": {"color": "black"}, "id": "192.168.3.37", "label": "192.168.3.37", "labelHighlightBold": true, "shape": "circle"}, {"font": {"color": "black"}, "id": "192.168.3.38", "label": "192.168.3.38", "labelHighlightBold": true, "shape": "circle"}, {"font": {"color": "black"}, "id": "192.168.3.40", "label": "192.168.3.40", "labelHighlightBold": true, "shape": "circle"}, {"font": {"color": "black"}, "id": "192.168.3.34", "label": "192.168.3.34", "labelHighlightBold": true, "shape": "circle"}, {"font": {"color": "black"}, "id": "192.168.3.36", "label": "192.168.3.36", "labelHighlightBold": true, "shape": "circle"}, {"font": {"color": "black"}, "id": "192.168.3.35", "label": "192.168.3.35", "labelHighlightBold": true, "shape": "circle"}, {"font": {"color": "black"}, "id": "192.168.3.39", "label": "192.168.3.39", "labelHighlightBold": true, "shape": "circle"}, {"font": {"color": "black"}, "id": "192.168.3.47", "label": "192.168.3.47", "labelHighlightBold": true, "shape": "circle"}, {"font": {"color": "black"}, "id": "192.168.3.55", "label": "192.168.3.55", "labelHighlightBold": true, "shape": "circle"}, {"font": {"color": "black"}, "id": "192.168.3.44", "label": "192.168.3.44", "labelHighlightBold": true, "shape": "circle"}, {"font": {"color": "black"}, "id": "192.168.3.60", "label": "192.168.3.60", "labelHighlightBold": true, "shape": "circle"}, {"font": {"color": "black"}, "id": "192.168.3.45", "label": "192.168.3.45", "labelHighlightBold": true, "shape": "circle"}, {"font": {"color": "black"}, "id": "192.168.3.51", "label": "192.168.3.51", "labelHighlightBold": true, "shape": "circle"}, {"font": {"color": "black"}, "id": "192.168.3.46", "label": "192.168.3.46", "labelHighlightBold": true, "shape": "circle"}, {"font": {"color": "black"}, "id": "192.168.3.52", "label": "192.168.3.52", "labelHighlightBold": true, "shape": "circle"}, {"font": {"color": "black"}, "id": "192.168.3.54", "label": "192.168.3.54", "labelHighlightBold": true, "shape": "circle"}, {"font": {"color": "black"}, "id": "192.168.3.32", "label": "192.168.3.32", "labelHighlightBold": true, "shape": "circle"}, {"font": {"color": "black"}, "id": "192.168.3.59", "label": "192.168.3.59", "labelHighlightBold": true, "shape": "circle"}, {"font": {"color": "black"}, "id": "192.168.3.33", "label": "192.168.3.33", "labelHighlightBold": true, "shape": "circle"}, {"font": {"color": "black"}, "id": "192.168.3.42", "label": "192.168.3.42", "labelHighlightBold": true, "shape": "circle"}, {"font": {"color": "black"}, "id": "192.168.3.58", "label": "192.168.3.58", "labelHighlightBold": true, "shape": "circle"}, {"font": {"color": "black"}, "id": "192.168.3.41", "label": "192.168.3.41", "labelHighlightBold": true, "shape": "circle"}, {"font": {"color": "black"}, "id": "192.168.3.114", "label": "192.168.3.114", "labelHighlightBold": true, "shape": "circle"}, {"font": {"color": "black"}, "id": "192.168.3.117", "label": "192.168.3.117", "labelHighlightBold": true, "shape": "circle"}, {"font": {"color": "black"}, "id": "192.168.3.115", "label": "192.168.3.115", "labelHighlightBold": true, "shape": "circle"}, {"font": {"color": "black"}, "id": "192.168.3.64", "label": "192.168.3.64", "labelHighlightBold": true, "shape": "circle"}, {"font": {"color": "black"}, "id": "192.168.3.71", "label": "192.168.3.71", "labelHighlightBold": true, "shape": "circle"}, {"font": {"color": "black"}, "id": "192.168.3.63", "label": "192.168.3.63", "labelHighlightBold": true, "shape": "circle"}, {"font": {"color": "black"}, "id": "192.168.3.65", "label": "192.168.3.65", "labelHighlightBold": true, "shape": "circle"}, {"font": {"color": "black"}, "id": "192.168.3.66", "label": "192.168.3.66", "labelHighlightBold": true, "shape": "circle"}, {"font": {"color": "black"}, "id": "192.168.3.61", "label": "192.168.3.61", "labelHighlightBold": true, "shape": "circle"}, {"font": {"color": "black"}, "id": "192.168.3.67", "label": "192.168.3.67", "labelHighlightBold": true, "shape": "circle"}, {"font": {"color": "black"}, "id": "192.168.3.62", "label": "192.168.3.62", "labelHighlightBold": true, "shape": "circle"}, {"font": {"color": "black"}, "id": "192.168.3.70", "label": "192.168.3.70", "labelHighlightBold": true, "shape": "circle"}, {"font": {"color": "black"}, "id": "192.168.3.75", "label": "192.168.3.75", "labelHighlightBold": true, "shape": "circle"}, {"font": {"color": "black"}, "id": "192.168.3.76", "label": "192.168.3.76", "labelHighlightBold": true, "shape": "circle"}, {"font": {"color": "black"}, "id": "192.168.3.74", "label": "192.168.3.74", "labelHighlightBold": true, "shape": "circle"}, {"font": {"color": "black"}, "id": "192.168.3.79", "label": "192.168.3.79", "labelHighlightBold": true, "shape": "circle"}]);
+        edges = new vis.DataSet([{"from": "192.168.2.112", "physics": false, "title": "2010-06-13T23:59:17\nUnknown_TCP", "to": "131.202.243.84"}, {"from": "218.108.130.167", "physics": false, "title": "2010-06-14T03:42:58\nSSH", "to": "192.168.5.122"}, {"from": "192.168.2.112", "physics": false, "title": "2010-06-14T17:19:19\nICMP", "to": "192.168.3.5"}, {"from": "192.168.2.112", "physics": false, "title": "2010-06-14T17:19:19\nICMP", "to": "192.168.3.8"}, {"from": "192.168.2.112", "physics": false, "title": "2010-06-14T17:19:19\nICMP", "to": "192.168.3.7"}, {"from": "192.168.2.112", "physics": false, "title": "2010-06-14T17:19:19\nICMP", "to": "192.168.3.6"}, {"from": "192.168.2.112", "physics": false, "title": "2010-06-14T17:19:19\nICMP", "to": "192.168.3.9"}, {"from": "192.168.2.112", "physics": false, "title": "2010-06-14T17:19:19\nICMP", "to": "192.168.3.13"}, {"from": "192.168.2.112", "physics": false, "title": "2010-06-14T17:19:19\nICMP", "to": "192.168.3.12"}, {"from": "192.168.2.112", "physics": false, "title": "2010-06-14T17:19:19\nICMP", "to": "192.168.3.14"}, {"from": "192.168.2.112", "physics": false, "title": "2010-06-14T17:19:19\nICMP", "to": "192.168.3.4"}, {"from": "192.168.2.112", "physics": false, "title": "2010-06-14T17:19:19\nICMP", "to": "192.168.3.11"}, {"from": "192.168.2.112", "physics": false, "title": "2010-06-14T17:19:19\nICMP", "to": "192.168.3.10"}, {"from": "192.168.2.112", "physics": false, "title": "2010-06-14T17:19:19\nICMP", "to": "192.168.3.1"}, {"from": "192.168.2.112", "physics": false, "title": "2010-06-14T17:19:20\nICMP", "to": "192.168.3.22"}, {"from": "192.168.2.112", "physics": false, "title": "2010-06-14T17:19:20\nICMP", "to": "192.168.3.17"}, {"from": "192.168.2.112", "physics": false, "title": "2010-06-14T17:19:20\nICMP", "to": "192.168.3.26"}, {"from": "192.168.2.112", "physics": false, "title": "2010-06-14T17:19:20\nICMP", "to": "192.168.3.21"}, {"from": "192.168.2.112", "physics": false, "title": "2010-06-14T17:19:20\nICMP", "to": "192.168.3.24"}, {"from": "192.168.2.112", "physics": false, "title": "2010-06-14T17:19:20\nICMP", "to": "192.168.3.23"}, {"from": "192.168.2.112", "physics": false, "title": "2010-06-14T17:19:20\nICMP", "to": "192.168.3.19"}, {"from": "192.168.2.112", "physics": false, "title": "2010-06-14T17:19:20\nICMP", "to": "192.168.3.20"}, {"from": "192.168.2.112", "physics": false, "title": "2010-06-14T17:19:20\nICMP", "to": "192.168.3.27"}, {"from": "192.168.2.112", "physics": false, "title": "2010-06-14T17:19:20\nICMP", "to": "192.168.3.25"}, {"from": "192.168.2.112", "physics": false, "title": "2010-06-14T17:19:20\nICMP", "to": "192.168.3.18"}, {"from": "192.168.2.112", "physics": false, "title": "2010-06-14T17:19:21\nICMP", "to": "192.168.3.50"}, {"from": "192.168.2.112", "physics": false, "title": "2010-06-14T17:19:21\nICMP", "to": "192.168.3.56"}, {"from": "192.168.2.112", "physics": false, "title": "2010-06-14T17:19:21\nICMP", "to": "192.168.3.57"}, {"from": "192.168.2.112", "physics": false, "title": "2010-06-14T17:19:21\nICMP", "to": "192.168.3.48"}, {"from": "192.168.2.112", "physics": false, "title": "2010-06-14T17:19:21\nICMP", "to": "192.168.3.49"}, {"from": "192.168.2.112", "physics": false, "title": "2010-06-14T17:19:21\nICMP", "to": "192.168.3.53"}, {"from": "192.168.2.112", "physics": false, "title": "2010-06-14T17:19:21\nICMP", "to": "192.168.3.43"}, {"from": "192.168.2.112", "physics": false, "title": "2010-06-14T17:19:21\nICMP", "to": "192.168.3.37"}, {"from": "192.168.2.112", "physics": false, "title": "2010-06-14T17:19:21\nICMP", "to": "192.168.3.38"}, {"from": "192.168.2.112", "physics": false, "title": "2010-06-14T17:19:21\nICMP", "to": "192.168.3.40"}, {"from": "192.168.2.112", "physics": false, "title": "2010-06-14T17:19:21\nICMP", "to": "192.168.3.34"}, {"from": "192.168.2.112", "physics": false, "title": "2010-06-14T17:19:21\nICMP", "to": "192.168.3.36"}, {"from": "192.168.2.112", "physics": false, "title": "2010-06-14T17:19:21\nICMP", "to": "192.168.3.35"}, {"from": "192.168.2.112", "physics": false, "title": "2010-06-14T17:19:21\nICMP", "to": "192.168.3.39"}, {"from": "192.168.2.112", "physics": false, "title": "2010-06-14T17:19:21\nICMP", "to": "192.168.3.47"}, {"from": "192.168.2.112", "physics": false, "title": "2010-06-14T17:19:21\nICMP", "to": "192.168.3.55"}, {"from": "192.168.2.112", "physics": false, "title": "2010-06-14T17:19:21\nICMP", "to": "192.168.3.44"}, {"from": "192.168.2.112", "physics": false, "title": "2010-06-14T17:19:21\nICMP", "to": "192.168.3.60"}, {"from": "192.168.2.112", "physics": false, "title": "2010-06-14T17:19:21\nICMP", "to": "192.168.3.45"}, {"from": "192.168.2.112", "physics": false, "title": "2010-06-14T17:19:21\nICMP", "to": "192.168.3.51"}, {"from": "192.168.2.112", "physics": false, "title": "2010-06-14T17:19:21\nICMP", "to": "192.168.3.46"}, {"from": "192.168.2.112", "physics": false, "title": "2010-06-14T17:19:21\nICMP", "to": "192.168.3.52"}, {"from": "192.168.2.112", "physics": false, "title": "2010-06-14T17:19:21\nICMP", "to": "192.168.3.54"}, {"from": "192.168.2.112", "physics": false, "title": "2010-06-14T17:19:21\nICMP", "to": "192.168.3.32"}, {"from": "192.168.2.112", "physics": false, "title": "2010-06-14T17:19:21\nICMP", "to": "192.168.3.59"}, {"from": "192.168.2.112", "physics": false, "title": "2010-06-14T17:19:21\nICMP", "to": "192.168.3.33"}, {"from": "192.168.2.112", "physics": false, "title": "2010-06-14T17:19:21\nICMP", "to": "192.168.3.42"}, {"from": "192.168.2.112", "physics": false, "title": "2010-06-14T17:19:21\nICMP", "to": "192.168.3.58"}, {"from": "192.168.2.112", "physics": false, "title": "2010-06-14T17:19:21\nICMP", "to": "192.168.3.41"}, {"from": "192.168.2.112", "physics": false, "title": "2010-06-14T17:19:23\nICMP", "to": "192.168.3.114"}, {"from": "192.168.2.112", "physics": false, "title": "2010-06-14T17:19:23\nICMP", "to": "192.168.3.117"}, {"from": "192.168.2.112", "physics": false, "title": "2010-06-14T17:19:23\nICMP", "to": "192.168.3.115"}, {"from": "192.168.2.112", "physics": false, "title": "2010-06-14T17:19:28\nSecureWeb", "to": "192.168.3.64"}, {"from": "192.168.2.112", "physics": false, "title": "2010-06-14T17:19:28\nSecureWeb", "to": "192.168.3.71"}, {"from": "192.168.2.112", "physics": false, "title": "2010-06-14T17:19:28\nSecureWeb", "to": "192.168.3.63"}, {"from": "192.168.2.112", "physics": false, "title": "2010-06-14T17:19:28\nSecureWeb", "to": "192.168.3.65"}, {"from": "192.168.2.112", "physics": false, "title": "2010-06-14T17:19:28\nSecureWeb", "to": "192.168.3.66"}, {"from": "192.168.2.112", "physics": false, "title": "2010-06-14T17:19:28\nSecureWeb", "to": "192.168.3.61"}, {"from": "192.168.2.112", "physics": false, "title": "2010-06-14T17:19:28\nSecureWeb", "to": "192.168.3.67"}, {"from": "192.168.2.112", "physics": false, "title": "2010-06-14T17:19:28\nSecureWeb", "to": "192.168.3.62"}, {"from": "192.168.2.112", "physics": false, "title": "2010-06-14T17:19:28\nSecureWeb", "to": "192.168.3.70"}, {"from": "192.168.2.112", "physics": false, "title": "2010-06-14T17:19:33\nHTTPWeb", "to": "192.168.3.75"}, {"from": "192.168.2.112", "physics": false, "title": "2010-06-14T17:19:33\nHTTPWeb", "to": "192.168.3.76"}, {"from": "192.168.2.112", "physics": false, "title": "2010-06-14T17:19:33\nHTTPWeb", "to": "192.168.3.74"}, {"from": "192.168.2.112", "physics": false, "title": "2010-06-14T17:19:33\nHTTPWeb", "to": "192.168.3.79"}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {
+    "configure": {
+        "enabled": true,
+        "filter": [
+            "nodes",
+            "edges"
+        ]
+    },
+    "edges": {
+        "color": {
+            "inherit": "from"
+        },
+        "smooth": {
+            "enabled": false,
+            "type": "continuous"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+        
+        
+
+        
+        // if this network requires displaying the configure window,
+        // put it in its div
+        options.configure["container"] = document.getElementById("config");
+        
+
+        network = new vis.Network(container, data, options);
+	 
+        
+
+
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>

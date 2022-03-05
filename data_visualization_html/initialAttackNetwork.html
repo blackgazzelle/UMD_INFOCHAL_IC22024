@@ -1,0 +1,124 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.css" type="text/css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis-network.min.js"> </script>
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 100%;
+            height: 750px;
+            background-color: #ffffff;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+
+        
+        #config {
+            float: left;
+            width: 400px;
+            height: 600px;
+        }
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+
+<div id = "config"></div>
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"font": {"color": "black"}, "id": "192.168.2.112", "label": "192.168.2.112", "labelHighlightBold": true, "shape": "circle"}, {"font": {"color": "black"}, "id": "131.202.243.84", "label": "131.202.243.84", "labelHighlightBold": true, "shape": "star"}, {"font": {"color": "black"}, "id": "218.108.130.167", "label": "218.108.130.167", "labelHighlightBold": true, "shape": "star"}, {"font": {"color": "black"}, "id": "192.168.5.122", "label": "192.168.5.122", "labelHighlightBold": true, "shape": "circle"}, {"font": {"color": "black"}, "id": "192.168.3.5", "label": "192.168.3.5", "labelHighlightBold": true, "shape": "circle"}, {"font": {"color": "black"}, "id": "192.168.3.8", "label": "192.168.3.8", "labelHighlightBold": true, "shape": "circle"}, {"font": {"color": "black"}, "id": "192.168.3.7", "label": "192.168.3.7", "labelHighlightBold": true, "shape": "circle"}, {"font": {"color": "black"}, "id": "192.168.3.6", "label": "192.168.3.6", "labelHighlightBold": true, "shape": "circle"}, {"font": {"color": "black"}, "id": "192.168.3.9", "label": "192.168.3.9", "labelHighlightBold": true, "shape": "circle"}]);
+        edges = new vis.DataSet([{"from": "192.168.2.112", "physics": false, "title": "2010-06-13T23:59:17\nUnknown_TCP", "to": "131.202.243.84"}, {"from": "218.108.130.167", "physics": false, "title": "2010-06-14T03:42:58\nSSH", "to": "192.168.5.122"}, {"from": "192.168.2.112", "physics": false, "title": "2010-06-14T17:19:19\nICMP", "to": "192.168.3.5"}, {"from": "192.168.2.112", "physics": false, "title": "2010-06-14T17:19:19\nICMP", "to": "192.168.3.8"}, {"from": "192.168.2.112", "physics": false, "title": "2010-06-14T17:19:19\nICMP", "to": "192.168.3.7"}, {"from": "192.168.2.112", "physics": false, "title": "2010-06-14T17:19:19\nICMP", "to": "192.168.3.6"}, {"from": "192.168.2.112", "physics": false, "title": "2010-06-14T17:19:19\nICMP", "to": "192.168.3.9"}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {
+    "configure": {
+        "enabled": true,
+        "filter": [
+            "nodes",
+            "edges"
+        ]
+    },
+    "edges": {
+        "color": {
+            "inherit": "from"
+        },
+        "smooth": {
+            "enabled": false,
+            "type": "continuous"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+        
+        
+
+        
+        // if this network requires displaying the configure window,
+        // put it in its div
+        options.configure["container"] = document.getElementById("config");
+        
+
+        network = new vis.Network(container, data, options);
+	 
+        
+
+
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>
